@@ -8,3 +8,12 @@ sudo systemctl enable mariadb
 sudo systemctl start mariadb
 
 sudo mysql_secure_installation
+
+sudo mysql -u root -p
+
+CREATE DATABASE phpipam;
+GRANT ALL ON phpipam.* TO phpipam@localhost IDENTIFIED BY 'phpipamsenha';
+FLUSH PRIVILEGES;
+QUIT;
+
+###################
