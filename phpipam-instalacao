@@ -44,3 +44,30 @@ sudo apt -y install apache2
 sudo a2dissite 000-default.conf
 sudo a2enmod rewrite
 sudo systemctl restart apache2
+sudo vim /etc/apache2/sites-available/phpipam.conf
+
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    DocumentRoot "/var/www/html/phpipam"
+    ServerName ipam.djones.com
+    ServerAlias www.ipam.djones.com
+    <Directory "/var/www/html/phpipam">
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+    ErrorLog "/var/log/apache2/phpipam-error_log"
+    CustomLog "/var/log/apache2/phpipam-access_log" combined
+</VirtualHost>
+
+	
+sudo chown -R www-data:www-data /var/www/html
+sudo a2ensite phpipam
+sudo systemctl restart apache2
+
+####### Configuração das funções de buscas ip e check.
+
+sudo crontab -e
+*/15 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/pingCheck.php
+*/15 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/discoveryCheck.php
+
