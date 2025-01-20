@@ -1,23 +1,19 @@
-## Denilson D'jones 
+### Denilson D'jones 
 
-# Configurando o banco mariadb
+### Configurando o banco mariadb
+
 sudo apt update
 sudo apt install mariadb-server mariadb-client
-
 sudo systemctl enable mariadb
 sudo systemctl start mariadb
-
 sudo mysql_secure_installation
-
 sudo mysql -u root -p
-
 CREATE DATABASE phpipam;
 GRANT ALL ON phpipam.* TO phpipam@localhost IDENTIFIED BY 'phpipamsenha';
 FLUSH PRIVILEGES;
 QUIT;
 
 ### Instalando o php.
-
 
 sudo apt -y install php php-{mysql,curl,gd,intl,pear,imap,memcache,pspell,tidy,xmlrpc,mbstring,gmp,json,xml,fpm}
 
@@ -33,3 +29,18 @@ sudo git clone --recursive https://github.com/phpipam/phpipam.git /var/www/html/
 cd /var/www/html/phpipam
 sudo cp config.dist.php config.php
 
+/**
+* database connection details
+******************************/
+$db['host'] = 'localhost';
+$db['user'] = 'phpipam';
+$db['pass'] = 'phpipamsenha';
+$db['name'] = 'phpipam';
+$db['port'] = 3306;
+
+### Instalar e configuar o apache2
+
+sudo apt -y install apache2
+sudo a2dissite 000-default.conf
+sudo a2enmod rewrite
+sudo systemctl restart apache2
