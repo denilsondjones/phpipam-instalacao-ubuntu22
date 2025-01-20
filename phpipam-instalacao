@@ -16,4 +16,20 @@ GRANT ALL ON phpipam.* TO phpipam@localhost IDENTIFIED BY 'phpipamsenha';
 FLUSH PRIVILEGES;
 QUIT;
 
-###################
+### Instalando o php.
+
+
+sudo apt -y install php php-{mysql,curl,gd,intl,pear,imap,memcache,pspell,tidy,xmlrpc,mbstring,gmp,json,xml,fpm}
+
+### Configurar o zona, para o brasil America\Sao_Paulo
+
+sudo vim /etc/php/*/apache2/php.ini
+sudo vim /etc/php/*/cli/php.ini
+
+### Baixando o phpipam estavvel.
+
+sudo apt -y install git
+sudo git clone --recursive https://github.com/phpipam/phpipam.git /var/www/html/phpipam
+cd /var/www/html/phpipam
+sudo cp config.dist.php config.php
+
