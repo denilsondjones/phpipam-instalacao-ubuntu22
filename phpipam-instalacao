@@ -71,3 +71,10 @@ sudo crontab -e
 */15 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/pingCheck.php
 */15 * * * * /usr/bin/php /var/www/html/phpipam/functions/scripts/discoveryCheck.php
 
+## Configuração de final
+
+Acesso a aplicação pelo IP do servidor.
+
+Caso escolhaa opçao de importar sql user esse comando abaixo.
+
+sudo mysql -u root -p phpipam < /var/www/html/phpipam/db/SCHEMA.sql
